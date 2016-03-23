@@ -43,6 +43,3 @@ DEPENDENCIES
   pg
   sinatra
   sinatra-activerecord
-
-BUNDLED WITH
-   1.10.3
