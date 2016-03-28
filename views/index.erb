@@ -3,6 +3,22 @@
  <li>
    <p><a href="<%= link.link %>"><%= link.link %></a> from <%= link.author %></p>
    <p><%= link.comment %></p> 
+   <p><a href="/comment/:link">Add Comment</a></p>
+   
+ 
+ 
+ 
+  <ul>
+   <% @comment.select do {|n| n.link == link.link} %>
+  <li>
+   <p><%= n.comment %></p>
+  </li>
+  <% end %>
+  </ul>
+ 
+ 
+ 
+   
  </li>
 <% end %>
 </ul>

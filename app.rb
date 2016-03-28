@@ -14,10 +14,31 @@ ActiveRecord::Base.establish_connection(
 )
 
 class Link < ActiveRecord::Base
+  has_many :comments
+end
+
+class Comment < ActiveRecord::Base
+  belongs_to :link
+end
+
+get '/comment/:link' do
+
+  @comment = Comment.find_by(link_id:params[:link])
+  erb :comment
+end
+
+post '/comment/:link' do
+  comment = Comment.new(params[:link])
+  if comment.save
+    redirect to "/"
+  else
+    return "failure!"
+  end
 end
 
 get '/' do
   @links = Link.order("id DESC")
+  @comment = Comment.order("id DESC")
   erb :index
 end
 

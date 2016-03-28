@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,15 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151010235516) do
+ActiveRecord::Schema.define(version: 20161010235516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "links", force: :cascade do |t|
-    t.string "author"
+  create_table "comment", force: :cascade do |t|
     t.string "link"
     t.text   "comment"
+  end
+
+  create_table "links", force: :cascade do |t|
+    t.string  "author"
+    t.string  "link"
+    t.text    "comment"
+    t.integer "comment_id"
   end
 
 end
