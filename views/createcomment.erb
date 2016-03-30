@@ -1,0 +1,7 @@
+<form action="/createComment/" method="POST">
+  Comment: <input type="text" name="comments[comment]"/><br/>
+  <input type="hidden" value="<%=@link_id%>" name="comments[links_id]"/>
+  <input type="submit"/>
+</form>
+
+<p><a href="/">Home</a></p>

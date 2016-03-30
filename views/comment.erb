@@ -1,6 +1,9 @@
-<form action="/comment" method="POST">
-  Comment: <input type="text" name="comment[comment]"><br/>
-  <input type="submit">
-</form>
 
-<p><a href="/">Home</a></p>
+
+  <ul>
+   <% @comment.where(links_id: link.id).find_each do |n| %>
+  <li>
+   <p><%= n.comment %></p>
+  </li>
+  <% end %>
+  </ul>

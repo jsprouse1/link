@@ -1,15 +1,14 @@
 <ul>
 <% @links.each do |link| %>
  <li>
-   <p><a href="<%= link.link %>"><%= link.link %></a> from <%= link.author %></p>
-   <p><%= link.comment %></p> 
-   <p><a href="/comment/:link">Add Comment</a></p>
-   
- 
+   <p><a href="<%= link.linkAddress %>"><%= link.linkAddress %></a> from <%= link.linkAuthor %></p>
+
+   <p><a href="/createComment/<%= link.id %>">Add Comment</a></p>
  
  
   <ul>
-   <% @comment.select do {|n| n.link == link.link} %>
+   <% comments = getComment(link.id)%>
+  <% comments.each do |n| %>
   <li>
    <p><%= n.comment %></p>
   </li>

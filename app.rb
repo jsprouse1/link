@@ -2,7 +2,7 @@ require 'sinatra'
 require 'uri'
 require 'active_record'
 
-db = URI.parse(ENV['DATABASE_URL'] || 'postgres:///mylinks')
+db = URI.parse(ENV['DATABASE_URL'] || 'postgres:///molinks')
 
 ActiveRecord::Base.establish_connection(
   :adapter  => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
@@ -13,22 +13,24 @@ ActiveRecord::Base.establish_connection(
   :encoding => 'utf8'
 )
 
+set :public_folder, "public"
+
 class Link < ActiveRecord::Base
-  has_many :comments
+  has_many :comment
 end
 
 class Comment < ActiveRecord::Base
-  belongs_to :link
+  belongs_to :links
 end
 
-get '/comment/:link' do
-
-  @comment = Comment.find_by(link_id:params[:link])
-  erb :comment
+get '/createComment/:id' do
+   @link_id = (params[:id])
+  
+  erb :createcomment
 end
 
-post '/comment/:link' do
-  comment = Comment.new(params[:link])
+post '/createComment/' do
+  comment = Comment.new(params[:comments])
   if comment.save
     redirect to "/"
   else
@@ -38,7 +40,6 @@ end
 
 get '/' do
   @links = Link.order("id DESC")
-  @comment = Comment.order("id DESC")
   erb :index
 end
 
@@ -53,4 +54,8 @@ post '/create' do
   else
     return "failure!"
   end
+end
+
+def getComment(linkid) 
+  return Comment.where(links_id: linkid)
 end
